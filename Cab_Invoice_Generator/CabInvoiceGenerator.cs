@@ -6,18 +6,36 @@ namespace Cab_Invoice_Generator
 {
     public class CabInvoiceGenerator
     {
-        private readonly double MINIMUM_COST_PER_KILOMETER = 10;
-        private readonly int COST_PER_TIME = 1;
-        private readonly double MINIMUM_FARE =  5;
+        private readonly double MINIMUM_COST_PER_KILOMETER_NORMAL = 10;
+        private readonly int COST_PER_TIME_NORMAL = 1;
+        private readonly double MINIMUM_FARE_NORMAL =  5;
+        private readonly double MINIMUM_COST_PER_KILOMETER_PREMIUM = 15;
+        private readonly int COST_PER_TIME_PREMIUM = 2;
+        private readonly double MINIMUM_FARE_PREMIUM = 20;
 
-        public double CalculateFare(double distance, int time)
+        public double CalculateFare(string rideType,double distance, int time)
         {
-            double totalFare = distance * MINIMUM_COST_PER_KILOMETER + time * COST_PER_TIME;
-            if (totalFare < MINIMUM_FARE)
+           
+            if (rideType == "normal")
             {
-                return MINIMUM_FARE;
+                double totalFare = distance * MINIMUM_COST_PER_KILOMETER_NORMAL + time * COST_PER_TIME_NORMAL;
+                if (totalFare < MINIMUM_FARE_NORMAL)
+                {
+                    return MINIMUM_FARE_NORMAL;
+                }
+                return totalFare;
             }
-            return totalFare;
+            if (rideType == "premium")
+            {
+                double totalFare = (distance * MINIMUM_COST_PER_KILOMETER_PREMIUM + time * COST_PER_TIME_PREMIUM);
+                if (totalFare > MINIMUM_FARE_PREMIUM)
+                {
+                    return totalFare;
+                    
+                }
+            }
+            return MINIMUM_FARE_PREMIUM;
+
         }
 
         public InvoiceSummary CalculateFare(Ride[] rides)
@@ -26,7 +44,7 @@ namespace Cab_Invoice_Generator
             int numberOfRides = 0;
             foreach (Ride ride in rides)
             {
-                totalFare += CalculateFare(ride.distance, ride.time);
+                totalFare += CalculateFare(ride.rideType, ride.distance, ride.time);
                 numberOfRides++;
             }
             InvoiceSummary invoiceSummery = new InvoiceSummary();
