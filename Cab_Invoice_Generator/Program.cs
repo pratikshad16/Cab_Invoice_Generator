@@ -1,10 +1,16 @@
-﻿using System;
-
-namespace Cab_Invoice_Generator
+﻿namespace Cab_Invoice_Generator
 {
-    class Program
+    using System;
+
+    /// <summary>
+    /// Program Class
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// to display message
+        /// </summary>
+        public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Cab Invoice Generator Program!");
         }
