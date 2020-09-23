@@ -38,14 +38,11 @@ namespace Cab_Invoice_Generator_TestCases
                 new Ride(0.1, 1)
                 };
             InvoiceSummary summary = cabInvoiceGenerator.CalculateFare(rides);
-            Assert.AreEqual(30,summary.totalFare);
+            Assert.AreEqual(30, summary.totalFare);
         }
         [Test]
         public void GivenDistanceAndTimeOfMultiRidesToInvoiceGeneratorShouldInhancedInvoice()
         {
-            // Local variables
-            bool exceptedInvoice = true;
-            bool returnInvoice = false;
             // sending two rides distance in double and  time in int
             Ride[] rides =
             {
@@ -59,13 +56,23 @@ namespace Cab_Invoice_Generator_TestCases
                 totalFare = 30,
                 averageFarePerRide = 15
             };
-            //Checkoing all three returnSummary values are equal to exceptedSummary
-            //if yes then returnInvoice will be 'true'
-            if (returnSummery.numberOfRides == expectedSummery.numberOfRides && returnSummery.totalFare == expectedSummery.totalFare && returnSummery.averageFarePerRide == expectedSummery.averageFarePerRide)
+            Assert.AreEqual(returnSummery.totalFare, expectedSummery.totalFare);
+            Assert.AreEqual(expectedSummery.numberOfRides, returnSummery.numberOfRides);
+            Assert.AreEqual(expectedSummery.averageFarePerRide, returnSummery.averageFarePerRide);
+        }
+        [Test]
+        public void GivenDistanceAndTimeOfMultiRidesToUserIdShouldTotalFare()
+        {
+            string userId = "pratiksha@123";
+            Ride[] rides =
             {
-                returnInvoice = true;
-            }
-            Assert.AreEqual(exceptedInvoice, returnInvoice);
+                    new Ride(2.0,5),
+                    new Ride(0.1,1)
+            };
+            RideRepository rideRepository = new RideRepository();
+            rideRepository.AddRides(userId, rides);
+            InvoiceSummary retunTotal = invoice.CalculateFare(rideRepository.GetRides(userId));
+            Assert.AreEqual(30, retunTotal.totalFare);
         }
     }
 }
