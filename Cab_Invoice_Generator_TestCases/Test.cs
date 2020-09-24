@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------
+// <copyright file="Test.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace Cab_Invoice_Generator_TestCases
 {
     using Cab_Invoice_Generator;
@@ -8,8 +13,20 @@ namespace Cab_Invoice_Generator_TestCases
     /// </summary>
     public class Test
     {
+        /// <summary>
+        /// object of cab invoice generator
+        /// </summary>
         private readonly CabInvoiceGenerator invoice = new CabInvoiceGenerator();
+
+        /// <summary>
+        /// object of ride repository
+        /// </summary>
         private readonly RideRepository rideRepository = new RideRepository();
+
+        /// <summary>
+        /// object of cab invoice generator
+        /// </summary>
+        private readonly CabInvoiceGenerator cabInvoiceGenerator = new CabInvoiceGenerator();
 
         /// <summary>
         /// setup method
@@ -18,17 +35,16 @@ namespace Cab_Invoice_Generator_TestCases
         public void Setup()
         {
         }
-
+        
         /// <summary>
         /// test method 1 
         /// </summary>
         [Test]
         public void GivenDistanceAndTime_ShouldReturnTotalFare()
         {
-            CabInvoiceGenerator cabInvoiceGenerator = new CabInvoiceGenerator();
             double distance = 2.0;
             int time = 5;
-            double fare = cabInvoiceGenerator.CalculateFare("normal", distance, time);
+            double fare = this.cabInvoiceGenerator.CalculateFare("normal", distance, time);
             Assert.AreEqual(25, fare, delta: 0.0);
         }
 
@@ -38,10 +54,9 @@ namespace Cab_Invoice_Generator_TestCases
         [Test]
         public void GivenDistanceAndTime_ShouldReturnMinimumFare()
         {
-            CabInvoiceGenerator cabInvoiceGenerator = new CabInvoiceGenerator();
             double distance = 0.1;
             int time = 1;
-            double fare = cabInvoiceGenerator.CalculateFare("normal", distance, time);
+            double fare = this.cabInvoiceGenerator.CalculateFare("normal", distance, time);
             Assert.AreEqual(5, fare, delta: 0.0);
         }
 
@@ -51,13 +66,12 @@ namespace Cab_Invoice_Generator_TestCases
         [Test]
         public void GivenMultipleRides_ShouldReturnInvoiceSummary()
         {
-            CabInvoiceGenerator cabInvoiceGenerator = new CabInvoiceGenerator();
             Ride[] rides =
                 {
                     new Ride("normal", 2.0, 5),
                     new Ride("normal", 0.1, 1)
                 };
-            InvoiceSummary summary = cabInvoiceGenerator.CalculateFare(rides);
+            InvoiceSummary summary = this.cabInvoiceGenerator.CalculateFare(rides);
             Assert.AreEqual(30, summary.TotalFare);
         }
 

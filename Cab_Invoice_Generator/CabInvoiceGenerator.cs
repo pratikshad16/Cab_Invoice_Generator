@@ -1,4 +1,9 @@
-﻿namespace Cab_Invoice_Generator
+﻿//-----------------------------------------------------------------------
+// <copyright file="CabInvoiceGenerator.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace Cab_Invoice_Generator
 {
     /// <summary>
     /// Main Class
@@ -35,11 +40,13 @@
         /// </summary>
         private readonly double minimumFarePremium = 20;
 
-        /// <CalculateFare>
-        /// Calculating Total Fare of a journey.
-        /// </CalculateFare>
-        /// <minimumFare></returns>
-        /// <totalFare></returns>
+        /// <summary>
+        /// method to calculate total fare
+        /// </summary>
+        /// <param name="rideType">ride type.</param>
+        /// <param name="distance">total distance.</param>
+        /// <param name="time">total time.</param>
+        /// <returns>return total fare</returns>
         public double CalculateFare(string rideType, double distance, int time)
         {
             if (rideType == "normal")

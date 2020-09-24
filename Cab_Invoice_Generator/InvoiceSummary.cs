@@ -1,4 +1,9 @@
-﻿namespace Cab_Invoice_Generator
+﻿//-----------------------------------------------------------------------
+// <copyright file="InvoiceSummary.cs" company="CompanyName">
+//     Company copyright tag.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace Cab_Invoice_Generator
 {
     /// <summary>
     /// Invoice summary Class
